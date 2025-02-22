@@ -1,0 +1,241 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Hero Banner Styling */
+.hero-banner {
+  background-image: url('https://img.freepik.com/free-photo/movie-slate-roll-with-popcorn_23-2148470233.jpg?t=st=1737906853~exp=1737910453~hmac=3e7a0e8f9c3d42f292567187d467b03ee83cb9adafb1d3b165991a22b6b8f85a&w=996');
+  background-size: cover;
+  background-position: center;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  position: relative;
+  padding: 0 20px;
+}
+
+.hero-banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.hero-content button {
+  background-color: #ff6600;
+  color: white;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hero-content button:hover {
+  background-color: #cc5200;
+}
+
+/* Intro Section Styling */
+.intro {
+  background-color: #f4f4f4;
+  padding: 40px 20px;
+  text-align: center;
+  max-width: 1000px;
+  margin: 30px auto;
+  border-radius: 10px;
+}
+
+.intro h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.intro p {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Footer Styling */
+footer {
+  background-color: #E4A11B;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+footer p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .hero-banner {
+    height: 60vh;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+
+  .intro {
+    padding: 30px 15px;
+  }
+
+  .intro h2 {
+    font-size: 2rem;
+  }
+
+  .intro p {
+    font-size: 1rem;
+  }
+}
+
+/* Card Layout */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 16px;
+}
+.card-content p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 360px; /* Set a fixed height */
+  position: relative;
+  overflow: hidden; /* Prevent overflow */
+}
+
+.card-thumbnail {
+  width: 100%;
+  height: 40%; /* Thumbnail height */
+  object-fit: cover; /* Ensure full coverage */
+}
+
+.card-content {
+  flex-grow: 1;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensure button stays at the bottom */
+  
+  
+}
+
+/* Button Styles */
+.card-content button {
+  margin-top: 8px;
+  padding: 10px 16px;
+  border: none;
+  background-color: #ff6600;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.card-content button:hover {
+  background-color: #ff6600;
+}
+
+/* Card Content Layout */
+.action-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top:-35px; 
+}
+
+.action-button-wrapper button {
+  width: 100%; /* Ensure button spans the full width */
+}
+.action-button-wrapper p{
+  font-size: small;
+}
+/* Movie details modal or section */
+.movie-details {
+  padding: 16px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 16px auto;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-details img {
+  width: 20%;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+.movie-details h2 {
+  margin: 8px 0;
+}
+
+.movie-details p {
+  color: #555;
+}
+
+/* Search Bar */
+.search-bar {
+  display: block;
+  margin: 16px auto;
+  padding: 8px;
+  width: 80%;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}

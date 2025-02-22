@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View History</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+            margin: 0;
+        }
+        .container {
+            width: 80%;
+            margin-top: -200px; /* Centers both heading & table */
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 10px; /* Reduce spacing between h2 and table */
+            font-size: 24px;
+            font-weight: bold;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%; /* Ensure it takes full container width */
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        td {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    {% include 'partials/navbar.html' %}
+    <div class="container">
+        <h2>{{ user.name }}'s Watch History</h2>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+            </tr>
+            {% for item in history %}
+            <tr>
+                <td>{{ item.movie.title }}</td>
+                <td>{{ item.date }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">No watch history available.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

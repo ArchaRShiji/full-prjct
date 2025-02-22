@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}">
+        <style>
+            .error-message { color: red; }
+            .success-message { color: green; }
+        </style>
+    </head>
+    <body>
+        {% include 'partials/navbar.html' %}
+        <div class="container">
+            <h1>Change Password</h1>
+            
+            {% if messages %}
+                {% for message in messages %}
+                <p class="{% if message.tags == 'error' %}error-message{% else %}success-message{% endif %}">
+                    {{ message }}
+                    </p>
+                {% endfor %}
+            {% endif %}
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <label for="cPsswd">Current Password:</label>
+                <input type="password" id="cPsswd" name="cPsswd" placeholder="Enter current password" required>
+
+                <label for="nPsswd">New Password:</label>
+                <input type="password" id="nPsswd" name="nPsswd" placeholder="Enter new password" required>
+
+                <label for="confPsswd">Confirm Password:</label>
+                <input type="password" id="confPsswd" name="confPsswd" placeholder="Confirm new password" required>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>

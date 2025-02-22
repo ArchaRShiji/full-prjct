@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Page</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            max-width: 90%;
+            word-wrap: break-word;
+            margin-top: 80px; /* Adjust this based on the navbar height */
+        }   
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+        }
+
+        input[type="text"], 
+        input[type="file"],
+        input[type="textarea"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        p {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            font-size: 12px;
+            white-space: normal;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        .video-container, .thumbnail-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+    </style>
+</head>
+<body>
+    {% include 'partials/navbar.html' %}
+
+    <div class="container">
+        <h1>Welcome</h1>
+        <form action="{% url 'edit_movie' movie.id %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" value="{{ movie.title }}"  placeholder="Enter title">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description">{{ movie.description }}</textarea>
+            </div>
+            <div class="form-group video-container">
+                <label for="video">Video:</label>
+                <input type="file" id="video" name="video">
+                {% if movie.video %}
+                    <p>Current Video: <a href="{{ movie.video.url }}" target="_blank">{{ movie.video.url }}</a></p>
+                {% endif %}
+            </div>
+            <div class="form-group thumbnail-container">
+                <label for="thumbnail">Thumbnail:</label>
+                <input type="file" id="thumbnail" name="thumbnail">
+                {% if movie.thumbnail %}
+                    <p>Current Thumbnail:</p>
+                    <img src="{{ movie.thumbnail.url }}" alt="Thumbnail">
+                {% endif %}
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <a href="{% url 'MovieList' %}">Cancel</a>
+    </div>
+</body>
+</html>

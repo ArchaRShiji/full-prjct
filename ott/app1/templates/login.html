@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}">
+    </head>
+    <body>
+        {% include 'partials/navbar.html' %}
+        <div class="container">
+            <h1>Login Page</h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="username" placeholder="Enter your username" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+                <button type="submit">Submit</button>
+            </form>
+
+            {% if form.errors %}
+                <p style="color: red;">Invalid username or password. Please try again.</p>
+            {% endif %}
+        </div>
+    </body>
+</html>

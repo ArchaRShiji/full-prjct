@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}">
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        td {
+            color: #555;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-edit {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .btn-view {
+            background-color: #FF9800;
+            color: white;
+        }
+
+        .search-container {
+            margin: 20px auto;
+            text-align: center;
+            width: 80%;
+        }
+
+        .search-container input[type="text"] {
+            padding: 8px;
+            width: 70%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .search-container button {
+            padding: 8px 16px;
+            font-size: 14px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .search-container button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+    <script>
+        function openViewhist(userId) {
+            window.location.href = '/viewhist/' + userId; 
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+        let searchInput = document.getElementById("searchUser");
+
+        if (searchInput) {
+            searchInput.addEventListener("keyup", function () {
+                let input = searchInput.value.toLowerCase();
+                let tableRows = document.querySelectorAll("table tr");
+
+                for (let i = 1; i < tableRows.length; i++) {
+                    let emailCell = tableRows[i].getElementsByTagName("td")[0];
+
+                    if (emailCell) {
+                        let emailText = emailCell.textContent.toLowerCase();
+                        if (emailText.includes(input)) {
+                            tableRows[i].style.display = "";
+                        } else {
+                            tableRows[i].style.display = "none";
+                        }
+                    }
+                }
+            });
+        }
+    });    
+    </script>
+</head>
+<body>
+    {% include 'partials/navbar.html' %}
+    <div class="search-container">
+        <form method="GET" action="{% url 'userList' %}">
+            <input type="text" placeholder="Search users..." id="searchUser" value="{{ query }}">
+        </form>
+    </div>
+
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Action</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.email }}</td>
+            <td>
+                {% if user.is_active %}
+                    <a href="{% url 'block_user' user.id %}">
+                        <button class="btn-edit">Block</button>
+                    </a>
+                    <button class="btn-delete" disabled>Unblock</button>
+                {% else %}
+                    <button class="btn-edit" disabled>Block</button>
+                    <a href="{% url 'unblock_user' user.id %}">
+                        <button class="btn-delete">Unblock</button>
+                    </a>
+                {% endif %}
+                <button class="btn-view" onclick="openViewhist('{{ user.id }}')">View</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
